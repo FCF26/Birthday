@@ -25,7 +25,22 @@
             justify-content: center;
         }
 
-        /* প্রফেশনাল রাতের আকাশ এবং থ্রি-ডি চাঁদ */
+        /* পেশাদার লোগো স্টাইল (উপরের বাম কোণা) */
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+
+        .logo-container img {
+            height: 45px;
+            width: auto;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6));
+            transition: transform 0.3s ease;
+        }
+
+        /* প্রফেশনাল রাতের আকাশ এবং থ্রি-ডি চাঁদ (উপরের ডান কোণা) */
         .moon {
             position: absolute;
             top: 30px;
@@ -107,7 +122,7 @@
             border-bottom: 7px solid inherit;
         }
 
-        /* নিখুঁত ও স্মুথ এসভিজি হার্ট বেলুন */
+        /* স্মুথ এসভিজি হার্ট বেলুন */
         .balloon-heart-svg {
             width: 48px;
             height: 48px;
@@ -240,6 +255,8 @@
         }
 
         @media (max-width: 600px) {
+            .logo-container { top: 15px; left: 15px; }
+            .logo-container img { height: 35px; }
             .moon { width: 55px; height: 55px; top: 15px; right: 20px; }
             .birthday-text { font-size: 1.7rem; }
             .cake-image-wrapper img { max-width: 160px; }
@@ -247,6 +264,11 @@
     </style>
 </head>
 <body>
+
+    <!-- লোগো সংযোজন -->
+    <div class="logo-container">
+        <img src="cop LOGO.png" alt="Logo">
+    </div>
 
     <div class="touch-overlay" id="touchMsg">✨ স্ক্রিনে যেকোনো জায়গায় টাচ করুন! ✨</div>
 
