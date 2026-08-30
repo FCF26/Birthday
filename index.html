@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Celebration & Music Player</title>
+    <title>3D Birthday Celebration</title>
     <style>
         * {
             margin: 0;
@@ -18,19 +18,21 @@
             background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             position: relative;
-            perspective: 1200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* 3D Moon */
+        /* প্রফেশনাল রাতের আকাশ এবং থ্রি-ডি চাঁদ */
         .moon {
             position: absolute;
-            top: 40px;
-            right: 50px;
-            width: 80px;
-            height: 80px;
+            top: 30px;
+            right: 40px;
+            width: 70px;
+            height: 70px;
             background: radial-gradient(circle at 30% 30%, #fefefe, #dcd6b5);
             border-radius: 50%;
-            box-shadow: 0 0 30px rgba(246, 241, 213, 0.6), inset -15px -10px 20px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 25px rgba(246, 241, 213, 0.5), inset -12px -8px 15px rgba(0, 0, 0, 0.4);
             z-index: 2;
         }
 
@@ -53,7 +55,7 @@
             50% { opacity: 1; transform: scale(1.3); }
         }
 
-        /* Balloons Container */
+        /* ভাসমান বেলুন কনটেইনার */
         .balloons-container {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -64,30 +66,29 @@
 
         .balloon {
             position: absolute;
-            bottom: -180px;
+            bottom: -150px;
             animation: floatUp var(--speed) linear infinite;
-            transform-style: preserve-3d;
         }
 
-        /* Normal 3D Spherical Balloon */
+        /* গ্লসি থ্রি-ডি ওভাল বেলুন */
         .balloon-3d {
-            width: 50px;
-            height: 60px;
+            width: 45px;
+            height: 55px;
             border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
             position: relative;
-            box-shadow: inset -12px -12px 20px rgba(0, 0, 0, 0.4), 
-                        inset 6px 6px 15px rgba(255, 255, 255, 0.65), 
-                        0 10px 20px rgba(0,0,0,0.3);
+            box-shadow: inset -10px -10px 18px rgba(0, 0, 0, 0.4), 
+                        inset 5px 5px 12px rgba(255, 255, 255, 0.6), 
+                        0 8px 16px rgba(0,0,0,0.3);
         }
 
         .balloon-3d::before {
             content: "";
             position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 10px;
-            height: 15px;
-            background: rgba(255, 255, 255, 0.65);
+            top: 8px;
+            left: 8px;
+            width: 8px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.6);
             border-radius: 50%;
             transform: rotate(-30deg);
             filter: blur(1px);
@@ -96,74 +97,41 @@
         .balloon-3d::after {
             content: "";
             position: absolute;
-            bottom: -7px;
+            bottom: -6px;
             left: 50%;
             transform: translateX(-50%);
             border-left: 4px solid transparent;
             border-right: 4px solid transparent;
-            border-bottom: 8px solid inherit;
+            border-bottom: 7px solid inherit;
         }
 
-        /* Realistic 3D Heart Balloon */
-        .balloon-heart-3d {
-            width: 55px;
-            height: 55px;
+        /* নিখুঁত ও স্মুথ এসভিজি হার্ট বেলুন */
+        .balloon-heart-svg {
+            width: 48px;
+            height: 48px;
             position: relative;
-            background-color: var(--balloon-color);
-            display: inline-block;
-            transform: rotate(45deg);
-            border-radius: 50% 50% 0 0;
-            box-shadow: inset -10px -10px 18px rgba(0, 0, 0, 0.4), 
-                        inset 6px 6px 12px rgba(255, 255, 255, 0.5), 
-                        0 12px 25px rgba(0,0,0,0.35);
-        }
-
-        .balloon-heart-3d::before {
-            content: "";
-            position: absolute;
-            left: -27px;
-            top: 0;
-            width: 55px;
-            height: 55px;
-            background-color: var(--balloon-color);
-            border-radius: 50%;
-            box-shadow: inset -5px -5px 12px rgba(0, 0, 0, 0.3), 
-                        inset 4px 4px 10px rgba(255, 255, 255, 0.4);
-        }
-
-        .balloon-heart-3d::after {
-            content: "";
-            position: absolute;
-            top: -27px;
-            left: 0;
-            width: 55px;
-            height: 55px;
-            background-color: var(--balloon-color);
-            border-radius: 50%;
-            box-shadow: inset -5px -5px 12px rgba(0, 0, 0, 0.3), 
-                        inset 4px 4px 10px rgba(255, 255, 255, 0.4);
         }
 
         .string {
             position: absolute;
-            bottom: -50px;
+            bottom: -35px;
             left: 50%;
-            width: 1.5px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.45);
+            width: 1px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.4);
             transform: translateX(-50%);
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(0) rotateZ(0deg); opacity: 0.95; }
-            50% { transform: translateY(-65vh) rotateZ(6deg); opacity: 0.8; }
-            100% { transform: translateY(-135vh) rotateZ(-6deg); opacity: 0.1; }
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.95; }
+            50% { transform: translateY(-60vh) rotate(5deg); opacity: 0.8; }
+            100% { transform: translateY(-130vh) rotate(-5deg); opacity: 0.1; }
         }
 
-        /* Center 3D Cake Container */
+        /* কেক ইমেজের জন্য সেন্টার কনটেইনার */
         .center-container {
             position: absolute;
-            top: 56%;
+            top: 52%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
@@ -171,130 +139,34 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 90%;
-            max-width: 400px;
-            transform-style: preserve-3d;
+            width: 100%;
+            max-width: 320px;
+            text-align: center;
         }
 
-        /* Realistic 3D Cake Structure */
-        .cake-wrapper {
+        .cake-image-wrapper {
             position: relative;
-            width: 220px;
-            height: 230px;
+            width: 100%;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            justify-content: flex-end;
-            transform: rotateX(12deg) rotateY(-8deg);
-            transform-style: preserve-3d;
+            animation: floatCake 3s ease-in-out infinite;
         }
 
-        /* Detached & Glowing 3D Candle */
-        .candle-container {
-            position: absolute;
-            top: 25px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 10;
-            transform: translateZ(45px);
+        .cake-image-wrapper img {
+            max-width: 210px;
+            width: 70%;
+            height: auto;
+            filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.6));
+            border-radius: 12px;
         }
 
-        .candle {
-            width: 12px;
-            height: 48px;
-            background: repeating-linear-gradient(45deg, #ff4757, #ff4757 6px, #ffffff 6px, #ffffff 12px);
-            border-radius: 4px;
-            box-shadow: 2px 5px 12px rgba(0,0,0,0.5), inset -2px 0 4px rgba(0,0,0,0.3);
-            position: relative;
+        @keyframes floatCake {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
 
-        .wick {
-            position: absolute;
-            top: -6px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 6px;
-            background-color: #222;
-        }
-
-        .flame {
-            position: absolute;
-            top: -26px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 15px;
-            height: 24px;
-            background: radial-gradient(ellipse at bottom, #fff 0%, #ffee55 40%, #ff6600 80%, transparent 100%);
-            border-radius: 50% 50% 20% 20%;
-            box-shadow: 0 0 20px #ff9900, 0 0 40px #ffee55, 0 0 60px #ff3300;
-            animation: flicker 0.12s infinite alternate ease-in-out;
-            transform-origin: bottom center;
-        }
-
-        @keyframes flicker {
-            0% { transform: translateX(-50%) scale(1) rotate(-3deg); }
-            100% { transform: translateX(-50%) scale(1.12) rotate(3deg); }
-        }
-
-        /* 3D Cylindrical Cake Layers */
-        .cake-layer {
-            border-radius: 50%;
-            position: relative;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), inset 0 10px 18px rgba(255, 255, 255, 0.5), inset 0 -12px 18px rgba(0, 0, 0, 0.35);
-            transform-style: preserve-3d;
-        }
-
-        .layer-top {
-            width: 135px;
-            height: 42px;
-            background: radial-gradient(circle at 50% 35%, #ff9ff3, #f368e0);
-            transform: translateZ(32px);
-            z-index: 5;
-        }
-
-        .layer-middle {
-            width: 175px;
-            height: 48px;
-            background: radial-gradient(circle at 50% 35%, #feca57, #ff9f43);
-            margin-top: -14px;
-            transform: translateZ(18px);
-            z-index: 4;
-        }
-
-        .layer-bottom {
-            width: 215px;
-            height: 55px;
-            background: radial-gradient(circle at 50% 35%, #48dbfb, #0abde3);
-            margin-top: -16px;
-            transform: translateZ(5px);
-            z-index: 3;
-        }
-
-        /* Drip Icing */
-        .icing-drip {
-            position: absolute;
-            top: 0; left: 12%; right: 12%;
-            height: 18px;
-            background: #ffffff;
-            border-radius: 0 0 12px 12px;
-            opacity: 0.95;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-
-        .plate {
-            width: 250px;
-            height: 24px;
-            background: radial-gradient(circle at 50% 50%, #ffffff, #dfe6e9);
-            border-radius: 50%;
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65), inset 0 4px 10px rgba(0,0,0,0.2);
-            margin-top: -12px;
-            transform: translateZ(0px);
-            z-index: 2;
-        }
-
-        /* Touch Overlay */
+        /* টাচ করার নির্দেশনা মেসেজ */
         .touch-overlay {
             position: fixed;
             top: 20px;
@@ -312,7 +184,7 @@
             animation: pulseBanner 1.5s infinite alternate;
             text-align: center;
             width: 90%;
-            max-width: 320px;
+            max-width: 300px;
         }
 
         @keyframes pulseBanner {
@@ -320,7 +192,7 @@
             100% { transform: translateX(-50%) scale(1.03); }
         }
 
-        /* Audio Button */
+        /* অডিও কন্ট্রোল বাটন */
         .audio-control {
             position: fixed;
             bottom: 20px;
@@ -341,8 +213,8 @@
         }
 
         @media (max-width: 600px) {
-            .moon { width: 60px; height: 60px; top: 20px; right: 20px; }
-            .cake-wrapper { transform: scale(0.8) rotateX(12deg) rotateY(-8deg); }
+            .moon { width: 55px; height: 55px; top: 15px; right: 20px; }
+            .cake-image-wrapper img { max-width: 180px; }
         }
     </style>
 </head>
@@ -355,19 +227,8 @@
     <div class="balloons-container" id="balloonsContainer"></div>
 
     <div class="center-container">
-        <div class="cake-wrapper">
-            <!-- Detached Glowing 3D Candle -->
-            <div class="candle-container">
-                <div class="candle">
-                    <div class="wick"></div>
-                    <div class="flame"></div>
-                </div>
-            </div>
-            <!-- Cake Layers -->
-            <div class="cake-layer layer-top"><div class="icing-drip"></div></div>
-            <div class="cake-layer layer-middle"></div>
-            <div class="cake-layer layer-bottom"></div>
-            <div class="plate"></div>
+        <div class="cake-image-wrapper">
+            <img src="Cake.png" alt="3D Birthday Cake">
         </div>
     </div>
 
@@ -378,9 +239,9 @@
     </button>
 
     <script>
-        // Stars
+        // তারা তৈরির স্ক্রিপ্ট
         const starsContainer = document.getElementById('starsContainer');
-        for (let i = 0; i < 75; i++) {
+        for (let i = 0; i < 70; i++) {
             const star = document.createElement('div');
             star.classList.add('star');
             const size = Math.random() * 3 + 1;
@@ -393,7 +254,7 @@
             starsContainer.appendChild(star);
         }
 
-        // 3D Spherical & Heart Balloons
+        // বেলুন তৈরির স্ক্রিপ্ট
         const balloonsContainer = document.getElementById('balloonsContainer');
         const colors = ['#ff4d6d', '#ff758c', '#3a86ff', '#8338ec', '#ffbe0b', '#00f5d4', '#fb5607'];
         
@@ -408,25 +269,29 @@
             balloon.style.setProperty('--speed', `${speed}s`);
 
             if (isHeart) {
-                balloon.classList.add('balloon-heart-3d');
-                balloon.style.setProperty('--balloon-color', color);
-                balloon.innerHTML = `<div class="string" style="top: 35px;"></div>`;
+                balloon.innerHTML = `
+                    <div class="balloon-heart-svg">
+                        <svg viewBox="0 0 32 32" fill="${color}" style="width:100%; height:100%; filter: drop-shadow(0 5px 8px rgba(0,0,0,0.4));">
+                            <path d="M23.6,0c-3.4,0-6.4,2.7-7.6,5.6C14.8,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,16,23.6,16,23.6s16-14.2,16-23.6C32,3.8,28.2,0,23.6,0z"/>
+                        </svg>
+                        <div class="string"></div>
+                    </div>`;
             } else {
                 balloon.classList.add('balloon-3d');
                 balloon.style.backgroundColor = color;
                 balloon.innerHTML = `<div class="string"></div>`;
             }
 
-            const scale = Math.random() * 0.4 + 0.8;
+            const scale = Math.random() * 0.4 + 0.75;
             balloon.style.transform = `scale(${scale})`;
             balloonsContainer.appendChild(balloon);
             setTimeout(() => balloon.remove(), speed * 1000);
         }
 
         setInterval(createBalloon, 600);
-        for(let i=0; i<7; i++) setTimeout(createBalloon, i * 250);
+        for(let i=0; i<6; i++) setTimeout(createBalloon, i * 250);
 
-        // Audio & Interaction Handler
+        // WebView অডিও এবং টাচ হ্যান্ডলার
         const audio = document.getElementById('bgMusic');
         const touchMsg = document.getElementById('touchMsg');
         const audioIcon = document.getElementById('audioIcon');
@@ -442,12 +307,12 @@
                 audioText.textContent = 'Playing';
                 touchMsg.style.display = 'none';
             }).catch(e => {
-                console.log("Waiting for user touch.");
+                console.log("Waiting for touch interaction.");
             });
         }
 
-        window.addEventListener('click', triggerPlay);
-        window.addEventListener('touchstart', triggerPlay);
+        window.addEventListener('click', () => { if (!isPlaying) triggerPlay(); });
+        window.addEventListener('touchstart', () => { if (!isPlaying) triggerPlay(); });
 
         audioBtn.addEventListener('click', (e) => {
             e.stopPropagation();
