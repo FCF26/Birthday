@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D Birthday Celebration</title>
+    <!-- আকর্ষণীয় ফন্টের জন্য Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -128,10 +130,10 @@
             100% { transform: translateY(-130vh) rotate(-5deg); opacity: 0.1; }
         }
 
-        /* কেক ইমেজের জন্য সেন্টার কনটেইনার */
+        /* কেক এবং টেক্সটের জন্য সেন্টার কনটেইনার */
         .center-container {
             position: absolute;
-            top: 52%;
+            top: 54%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
@@ -140,8 +142,33 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            max-width: 320px;
+            max-width: 350px;
             text-align: center;
+        }
+
+        /* রেইনবো এবং ব্লিংকিং ইফেক্টসহ Happy Birthday টেক্সট */
+        .birthday-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            letter-spacing: 1.5px;
+            animation: rainbowColor 4s linear infinite, blinkEffect 1.2s ease-in-out infinite alternate;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
+            white-space: nowrap;
+        }
+
+        @keyframes rainbowColor {
+            0% { color: #ff4d6d; }
+            20% { color: #ffa500; }
+            40% { color: #ffeb3b; }
+            60% { color: #00f5d4; }
+            80% { color: #3a86ff; }
+            100% { color: #ff007f; }
+        }
+
+        @keyframes blinkEffect {
+            0% { opacity: 0.3; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1.05); }
         }
 
         .cake-image-wrapper {
@@ -154,8 +181,8 @@
         }
 
         .cake-image-wrapper img {
-            max-width: 210px;
-            width: 70%;
+            max-width: 200px;
+            width: 65%;
             height: auto;
             filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.6));
             border-radius: 12px;
@@ -214,7 +241,8 @@
 
         @media (max-width: 600px) {
             .moon { width: 55px; height: 55px; top: 15px; right: 20px; }
-            .cake-image-wrapper img { max-width: 180px; }
+            .birthday-text { font-size: 1.7rem; }
+            .cake-image-wrapper img { max-width: 160px; }
         }
     </style>
 </head>
@@ -227,6 +255,7 @@
     <div class="balloons-container" id="balloonsContainer"></div>
 
     <div class="center-container">
+        <div class="birthday-text">Happy Birthday</div>
         <div class="cake-image-wrapper">
             <img src="Cake.png" alt="3D Birthday Cake">
         </div>
