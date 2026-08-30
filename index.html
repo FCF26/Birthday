@@ -75,7 +75,6 @@
             animation: floatUp var(--speed) linear infinite;
         }
 
-        /* ডিম্বাকৃতির বেলুন */
         .balloon-oval {
             width: 45px;
             height: 55px;
@@ -94,7 +93,6 @@
             border-bottom: 8px solid inherit;
         }
 
-        /* বেলুনের সুতো */
         .string {
             position: absolute;
             bottom: -40px;
@@ -105,7 +103,6 @@
             transform: translateX(-50%);
         }
 
-        /* হার্ট শেপ বেলুন */
         .balloon-heart svg {
             width: 50px;
             height: 50px;
@@ -120,7 +117,7 @@
         /* মাঝখানের কেক কনটেইনার */
         .center-container {
             position: absolute;
-            top: 55%;
+            top: 52%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
@@ -132,10 +129,259 @@
             max-width: 400px;
         }
 
-        /* কেক ডিজাইন */
         .cake-wrapper {
             position: relative;
             width: 200px;
             height: 200px;
             display: flex;
-            flex-direction: column
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .candle {
+            position: absolute;
+            top: 25px;
+            width: 12px;
+            height: 45px;
+            background: linear-gradient(to bottom, #ff758c, #ff7eb3);
+            border-radius: 4px 4px 0 0;
+            z-index: 5;
+            box-shadow: inset -2px 0 2px rgba(0,0,0,0.2);
+        }
+
+        .wick {
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 8px;
+            background-color: #222;
+        }
+
+        .flame {
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 20px;
+            background: radial-gradient(ellipse at bottom, #ffee55 0%, #ff9900 60%, transparent 100%);
+            border-radius: 50% 50% 20% 20%;
+            box-shadow: 0 0 15px #ff9900, 0 0 30px #ffee55;
+            animation: flicker 0.1s infinite alternate ease-in-out;
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1) rotate(-2deg); opacity: 0.95; }
+            100% { transform: translateX(-50%) scale(1.15) rotate(2deg); opacity: 1; }
+        }
+
+        .cake-layer {
+            border-radius: 10px 10px 0 0;
+            box-shadow: inset 0 5px 10px rgba(255, 255, 255, 0.3), 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .layer-top { width: 120px; height: 40px; background: #ffb6c1; border-bottom: 4px solid #f8a5c2; }
+        .layer-middle { width: 160px; height: 45px; background: #f7d794; border-bottom: 4px solid #f5cd79; }
+        .layer-bottom { width: 200px; height: 50px; background: #778beb; border-radius: 10px 10px 5px 5px; }
+
+        .icing {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 12px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            opacity: 0.9;
+        }
+
+        .plate {
+            width: 230px; height: 12px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+            margin-top: 2px;
+        }
+
+        /* টাচ করার জন্য নোটিফিকেশন ওভারলে (User Prompt) */
+        .touch-overlay {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 105, 180, 0.85);
+            backdrop-filter: blur(8px);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            animation: pulseBanner 1.5s infinite alternate;
+            text-align: center;
+            width: 90%;
+            max-width: 320px;
+        }
+
+        @keyframes pulseBanner {
+            0% { transform: translateX(-50%) scale(1); }
+            100% { transform: translateX(-50%) scale(1.03); }
+        }
+
+        /* অডিও কন্ট্রোল বাটন */
+        .audio-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 600px) {
+            .moon { width: 60px; height: 60px; top: 20px; right: 20px; }
+            .cake-wrapper { transform: scale(0.85); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- টাচ করার নির্দেশনা মেসেজ -->
+    <div class="touch-overlay" id="touchMsg">✨ গান বাজাতে স্ক্রিনে যেকোনো জায়গায় টাচ করুন! ✨</div>
+
+    <div class="moon"></div>
+    <div class="stars-container" id="starsContainer"></div>
+    <div class="balloons-container" id="balloonsContainer"></div>
+
+    <div class="center-container">
+        <div class="cake-wrapper">
+            <div class="candle">
+                <div class="wick"></div>
+                <div class="flame"></div>
+            </div>
+            <div class="cake-layer layer-top"><div class="icing"></div></div>
+            <div class="cake-layer layer-middle"><div class="icing"></div></div>
+            <div class="cake-layer layer-bottom"><div class="icing"></div></div>
+            <div class="plate"></div>
+        </div>
+    </div>
+
+    <!-- অডিও ট্যাগ (লুপ অন করা) -->
+    <audio id="bgMusic" src="Tune.mp3" loop preload="auto"></audio>
+
+    <button class="audio-control" id="audioBtn">
+        <span id="audioIcon">🔇</span> <span id="audioText">Play Music</span>
+    </button>
+
+    <script>
+        // তারা তৈরি
+        const starsContainer = document.getElementById('starsContainer');
+        for (let i = 0; i < 70; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            const size = Math.random() * 3 + 1;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.setProperty('--duration', `${Math.random() * 3 + 1.5}s`);
+            star.style.animationDelay = `${Math.random() * 3}s`;
+            starsContainer.appendChild(star);
+        }
+
+        // বেলুন তৈরি
+        const balloonsContainer = document.getElementById('balloonsContainer');
+        const colors = ['#ff4d6d', '#ff758c', '#3a86ff', '#8338ec', '#ffbe0b', '#00f5d4'];
+        
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            const isHeart = Math.random() > 0.4;
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const speed = Math.random() * 6 + 6;
+
+            balloon.classList.add('balloon');
+            balloon.style.left = `${Math.random() * 95}%`;
+            balloon.style.setProperty('--speed', `${speed}s`);
+
+            if (isHeart) {
+                balloon.classList.add('balloon-heart');
+                balloon.innerHTML = `
+                    <svg viewBox="0 0 32 32" fill="${color}">
+                        <path d="M23.6,0c-3.4,0-6.4,2.7-7.6,5.6C14.8,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,16,23.6,16,23.6s16-14.2,16-23.6C32,3.8,28.2,0,23.6,0z"/>
+                    </svg>
+                    <div class="string"></div>`;
+            } else {
+                balloon.classList.add('balloon-oval');
+                balloon.style.backgroundColor = color;
+                balloon.innerHTML = `<div class="string"></div>`;
+            }
+
+            balloon.style.transform = `scale(${Math.random() * 0.4 + 0.8})`;
+            balloonsContainer.appendChild(balloon);
+            setTimeout(() => balloon.remove(), speed * 1000);
+        }
+
+        setInterval(createBalloon, 700);
+        for(let i=0; i<6; i++) setTimeout(createBalloon, i * 300);
+
+        // WebView অডিও হ্যান্ডলিং
+        const audio = document.getElementById('bgMusic');
+        const touchMsg = document.getElementById('touchMsg');
+        const audioIcon = document.getElementById('audioIcon');
+        const audioText = document.getElementById('audioText');
+        const audioBtn = document.getElementById('audioBtn');
+
+        let isPlaying = false;
+
+        function triggerPlay() {
+            audio.play().then(() => {
+                isPlaying = true;
+                audioIcon.textContent = '🎵';
+                audioText.textContent = 'Playing';
+                touchMsg.style.display = 'none'; // টাচ করার পর মেসেজ গায়েব হয়ে যাবে
+            }).catch(e => {
+                console.log("Audio play blocked, waiting for touch.");
+            });
+        }
+
+        // স্ক্রিনে টাচ করলেই মিউজিক চালু হবে
+        const handleUserInteraction = () => {
+            if (!isPlaying) {
+                triggerPlay();
+            }
+        };
+
+        window.addEventListener('click', handleUserInteraction);
+        window.addEventListener('touchstart', handleUserInteraction);
+
+        // ম্যানুয়াল কন্ট্রোল বাটন
+        audioBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (audio.paused) {
+                audio.play();
+                audioIcon.textContent = '🎵';
+                audioText.textContent = 'Playing';
+                touchMsg.style.display = 'none';
+                isPlaying = true;
+            } else {
+                audio.pause();
+                audioIcon.textContent = '🔇';
+                audioText.textContent = 'Paused';
+                isPlaying = false;
+            }
+        });
+    </script>
+</body>
+</html>
