@@ -18,7 +18,7 @@
             background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             position: relative;
-            perspective: 1000px;
+            perspective: 1200px;
         }
 
         /* 3D Moon */
@@ -53,7 +53,7 @@
             50% { opacity: 1; transform: scale(1.3); }
         }
 
-        /* 3D Balloons Container */
+        /* Balloons Container */
         .balloons-container {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -69,26 +69,25 @@
             transform-style: preserve-3d;
         }
 
-        /* 3D Spherical Balloon with Glossy Highlight */
+        /* Normal 3D Spherical Balloon */
         .balloon-3d {
-            width: 55px;
-            height: 65px;
+            width: 50px;
+            height: 60px;
             border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
             position: relative;
-            box-shadow: inset -10px -10px 20px rgba(0, 0, 0, 0.35), 
-                        inset 5px 5px 15px rgba(255, 255, 255, 0.6), 
+            box-shadow: inset -12px -12px 20px rgba(0, 0, 0, 0.4), 
+                        inset 6px 6px 15px rgba(255, 255, 255, 0.65), 
                         0 10px 20px rgba(0,0,0,0.3);
         }
 
-        /* Glossy shine spot on balloon */
         .balloon-3d::before {
             content: "";
             position: absolute;
             top: 10px;
             left: 10px;
-            width: 12px;
-            height: 18px;
-            background: rgba(255, 255, 255, 0.6);
+            width: 10px;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.65);
             border-radius: 50%;
             transform: rotate(-30deg);
             filter: blur(1px);
@@ -97,41 +96,74 @@
         .balloon-3d::after {
             content: "";
             position: absolute;
-            bottom: -8px;
+            bottom: -7px;
             left: 50%;
             transform: translateX(-50%);
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-bottom: 9px solid inherit;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-bottom: 8px solid inherit;
         }
 
-        /* 3D Heart Balloon */
-        .balloon-heart-3d svg {
-            width: 60px;
-            height: 60px;
-            filter: drop-shadow(0px 8px 12px rgba(0,0,0,0.4));
+        /* Realistic 3D Heart Balloon */
+        .balloon-heart-3d {
+            width: 55px;
+            height: 55px;
+            position: relative;
+            background-color: var(--balloon-color);
+            display: inline-block;
+            transform: rotate(45deg);
+            border-radius: 50% 50% 0 0;
+            box-shadow: inset -10px -10px 18px rgba(0, 0, 0, 0.4), 
+                        inset 6px 6px 12px rgba(255, 255, 255, 0.5), 
+                        0 12px 25px rgba(0,0,0,0.35);
+        }
+
+        .balloon-heart-3d::before {
+            content: "";
+            position: absolute;
+            left: -27px;
+            top: 0;
+            width: 55px;
+            height: 55px;
+            background-color: var(--balloon-color);
+            border-radius: 50%;
+            box-shadow: inset -5px -5px 12px rgba(0, 0, 0, 0.3), 
+                        inset 4px 4px 10px rgba(255, 255, 255, 0.4);
+        }
+
+        .balloon-heart-3d::after {
+            content: "";
+            position: absolute;
+            top: -27px;
+            left: 0;
+            width: 55px;
+            height: 55px;
+            background-color: var(--balloon-color);
+            border-radius: 50%;
+            box-shadow: inset -5px -5px 12px rgba(0, 0, 0, 0.3), 
+                        inset 4px 4px 10px rgba(255, 255, 255, 0.4);
         }
 
         .string {
             position: absolute;
-            bottom: -45px;
+            bottom: -50px;
             left: 50%;
             width: 1.5px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.4);
+            height: 50px;
+            background: rgba(255, 255, 255, 0.45);
             transform: translateX(-50%);
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(0) rotateZ(0deg) translateZ(0px); opacity: 0.95; }
-            50% { transform: translateY(-60vh) rotateZ(8deg) translateZ(30px); opacity: 0.8; }
-            100% { transform: translateY(-130vh) rotateZ(-8deg) translateZ(60px); opacity: 0.1; }
+            0% { transform: translateY(0) rotateZ(0deg); opacity: 0.95; }
+            50% { transform: translateY(-65vh) rotateZ(6deg); opacity: 0.8; }
+            100% { transform: translateY(-135vh) rotateZ(-6deg); opacity: 0.1; }
         }
 
         /* Center 3D Cake Container */
         .center-container {
             position: absolute;
-            top: 54%;
+            top: 56%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
@@ -144,48 +176,55 @@
             transform-style: preserve-3d;
         }
 
-        /* 3D Realistic Cake Structure */
+        /* Realistic 3D Cake Structure */
         .cake-wrapper {
             position: relative;
             width: 220px;
-            height: 220px;
+            height: 230px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-end;
-            transform: rotateX(15deg) rotateY(-10deg);
+            transform: rotateX(12deg) rotateY(-8deg);
             transform-style: preserve-3d;
         }
 
-        /* 3D Candle */
-        .candle {
+        /* Detached & Glowing 3D Candle */
+        .candle-container {
             position: absolute;
-            top: 15px;
-            width: 14px;
-            height: 50px;
-            background: repeating-linear-gradient(45deg, #ff758c, #ff758c 8px, #fff 8px, #fff 16px);
+            top: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+            transform: translateZ(45px);
+        }
+
+        .candle {
+            width: 12px;
+            height: 48px;
+            background: repeating-linear-gradient(45deg, #ff4757, #ff4757 6px, #ffffff 6px, #ffffff 12px);
             border-radius: 4px;
-            z-index: 6;
-            box-shadow: 2px 5px 10px rgba(0,0,0,0.4), inset -2px 0 4px rgba(0,0,0,0.3);
-            transform: translateZ(30px);
+            box-shadow: 2px 5px 12px rgba(0,0,0,0.5), inset -2px 0 4px rgba(0,0,0,0.3);
+            position: relative;
         }
 
         .wick {
             position: absolute;
-            top: -7px;
+            top: -6px;
             left: 50%;
             transform: translateX(-50%);
             width: 2px;
-            height: 7px;
+            height: 6px;
             background-color: #222;
         }
 
         .flame {
             position: absolute;
-            top: -28px;
+            top: -26px;
             left: 50%;
             transform: translateX(-50%);
-            width: 16px;
+            width: 15px;
             height: 24px;
             background: radial-gradient(ellipse at bottom, #fff 0%, #ffee55 40%, #ff6600 80%, transparent 100%);
             border-radius: 50% 50% 20% 20%;
@@ -199,63 +238,63 @@
             100% { transform: translateX(-50%) scale(1.12) rotate(3deg); }
         }
 
-        /* 3D Cake Layers with Cylindrical Depth */
+        /* 3D Cylindrical Cake Layers */
         .cake-layer {
             border-radius: 50%;
             position: relative;
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4), inset 0 8px 15px rgba(255, 255, 255, 0.4), inset 0 -10px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), inset 0 10px 18px rgba(255, 255, 255, 0.5), inset 0 -12px 18px rgba(0, 0, 0, 0.35);
             transform-style: preserve-3d;
         }
 
         .layer-top {
-            width: 130px;
-            height: 38px;
-            background: radial-gradient(circle at 50% 40%, #ffc0cb, #ff9bb3);
-            transform: translateZ(25px);
+            width: 135px;
+            height: 42px;
+            background: radial-gradient(circle at 50% 35%, #ff9ff3, #f368e0);
+            transform: translateZ(32px);
             z-index: 5;
         }
 
         .layer-middle {
-            width: 170px;
-            height: 45px;
-            background: radial-gradient(circle at 50% 40%, #ffeaa7, #fdcb6e);
-            margin-top: -12px;
-            transform: translateZ(15px);
+            width: 175px;
+            height: 48px;
+            background: radial-gradient(circle at 50% 35%, #feca57, #ff9f43);
+            margin-top: -14px;
+            transform: translateZ(18px);
             z-index: 4;
         }
 
         .layer-bottom {
-            width: 210px;
-            height: 52px;
-            background: radial-gradient(circle at 50% 40%, #81ecec, #00cec9);
-            margin-top: -14px;
+            width: 215px;
+            height: 55px;
+            background: radial-gradient(circle at 50% 35%, #48dbfb, #0abde3);
+            margin-top: -16px;
             transform: translateZ(5px);
             z-index: 3;
         }
 
-        /* Drip Icing for 3D look */
+        /* Drip Icing */
         .icing-drip {
             position: absolute;
-            top: 0; left: 15%; right: 15%;
-            height: 16px;
-            background: #fff;
-            border-radius: 0 0 10px 10px;
+            top: 0; left: 12%; right: 12%;
+            height: 18px;
+            background: #ffffff;
+            border-radius: 0 0 12px 12px;
             opacity: 0.95;
-            box-shadow: 0 3px 5px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
         .plate {
-            width: 245px;
-            height: 22px;
+            width: 250px;
+            height: 24px;
             background: radial-gradient(circle at 50% 50%, #ffffff, #dfe6e9);
             border-radius: 50%;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), inset 0 3px 8px rgba(0,0,0,0.2);
-            margin-top: -10px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65), inset 0 4px 10px rgba(0,0,0,0.2);
+            margin-top: -12px;
             transform: translateZ(0px);
             z-index: 2;
         }
 
-        /* Touch Overlay Notification */
+        /* Touch Overlay */
         .touch-overlay {
             position: fixed;
             top: 20px;
@@ -281,7 +320,7 @@
             100% { transform: translateX(-50%) scale(1.03); }
         }
 
-        /* Audio Control Button */
+        /* Audio Button */
         .audio-control {
             position: fixed;
             bottom: 20px;
@@ -303,13 +342,13 @@
 
         @media (max-width: 600px) {
             .moon { width: 60px; height: 60px; top: 20px; right: 20px; }
-            .cake-wrapper { transform: scale(0.8) rotateX(15deg) rotateY(-10deg); }
+            .cake-wrapper { transform: scale(0.8) rotateX(12deg) rotateY(-8deg); }
         }
     </style>
 </head>
 <body>
 
-    <div class="touch-overlay" id="touchMsg">✨ গান বাজাতে স্ক্রিনে যেকোনো জায়গায় টাচ করুন! ✨</div>
+    <div class="touch-overlay" id="touchMsg">✨ স্ক্রিনে যেকোনো জায়গায় টাচ করুন! ✨</div>
 
     <div class="moon"></div>
     <div class="stars-container" id="starsContainer"></div>
@@ -317,10 +356,14 @@
 
     <div class="center-container">
         <div class="cake-wrapper">
-            <div class="candle">
-                <div class="wick"></div>
-                <div class="flame"></div>
+            <!-- Detached Glowing 3D Candle -->
+            <div class="candle-container">
+                <div class="candle">
+                    <div class="wick"></div>
+                    <div class="flame"></div>
+                </div>
             </div>
+            <!-- Cake Layers -->
             <div class="cake-layer layer-top"><div class="icing-drip"></div></div>
             <div class="cake-layer layer-middle"></div>
             <div class="cake-layer layer-bottom"></div>
@@ -335,7 +378,7 @@
     </button>
 
     <script>
-        // 3D Stars
+        // Stars
         const starsContainer = document.getElementById('starsContainer');
         for (let i = 0; i < 75; i++) {
             const star = document.createElement('div');
@@ -350,7 +393,7 @@
             starsContainer.appendChild(star);
         }
 
-        // 3D Glossy Balloons & Hearts
+        // 3D Spherical & Heart Balloons
         const balloonsContainer = document.getElementById('balloonsContainer');
         const colors = ['#ff4d6d', '#ff758c', '#3a86ff', '#8338ec', '#ffbe0b', '#00f5d4', '#fb5607'];
         
@@ -366,11 +409,8 @@
 
             if (isHeart) {
                 balloon.classList.add('balloon-heart-3d');
-                balloon.innerHTML = `
-                    <svg viewBox="0 0 32 32" fill="${color}">
-                        <path d="M23.6,0c-3.4,0-6.4,2.7-7.6,5.6C14.8,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,16,23.6,16,23.6s16-14.2,16-23.6C32,3.8,28.2,0,23.6,0z"/>
-                    </svg>
-                    <div class="string"></div>`;
+                balloon.style.setProperty('--balloon-color', color);
+                balloon.innerHTML = `<div class="string" style="top: 35px;"></div>`;
             } else {
                 balloon.classList.add('balloon-3d');
                 balloon.style.backgroundColor = color;
@@ -386,7 +426,7 @@
         setInterval(createBalloon, 600);
         for(let i=0; i<7; i++) setTimeout(createBalloon, i * 250);
 
-        // WebView Audio & Interaction Handler
+        // Audio & Interaction Handler
         const audio = document.getElementById('bgMusic');
         const touchMsg = document.getElementById('touchMsg');
         const audioIcon = document.getElementById('audioIcon');
