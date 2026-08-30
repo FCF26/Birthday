@@ -145,7 +145,7 @@
             100% { transform: translateY(-130vh) rotate(-5deg); opacity: 0.1; }
         }
 
-        /* কেক এবং টেক্সটের জন্য সেন্টার কনটেইনার */
+        /* কেক এবং টেকستের জন্য সেন্টার কনটেইনার */
         .center-container {
             position: absolute;
             top: 54%;
@@ -156,16 +156,27 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 100%;
-            max-width: 350px;
+            width: 90%;
+            max-width: 420px;
             text-align: center;
+        }
+
+        /* বাংলা শুভেচ্ছাবাণী স্টাইল */
+        .bengali-wish {
+            font-size: 1.05rem;
+            color: #ffffff;
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-weight: 500;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+            padding: 0 5px;
         }
 
         /* রেইনবো এবং ব্লিংকিং ইফেক্টসহ Happy Birthday টেক্সট */
         .birthday-text {
             font-family: 'Pacifico', cursive;
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+            font-size: 2rem;
+            margin-bottom: 12px;
             letter-spacing: 1.5px;
             animation: rainbowColor 4s linear infinite, blinkEffect 1.2s ease-in-out infinite alternate;
             filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
@@ -196,8 +207,8 @@
         }
 
         .cake-image-wrapper img {
-            max-width: 200px;
-            width: 65%;
+            max-width: 190px;
+            width: 60%;
             height: auto;
             filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.6));
             border-radius: 12px;
@@ -258,8 +269,9 @@
             .logo-container { top: 15px; left: 15px; }
             .logo-container img { height: 35px; }
             .moon { width: 55px; height: 55px; top: 15px; right: 20px; }
-            .birthday-text { font-size: 1.7rem; }
-            .cake-image-wrapper img { max-width: 160px; }
+            .bengali-wish { font-size: 0.9rem; }
+            .birthday-text { font-size: 1.6rem; }
+            .cake-image-wrapper img { max-width: 150px; }
         }
     </style>
 </head>
@@ -277,6 +289,7 @@
     <div class="balloons-container" id="balloonsContainer"></div>
 
     <div class="center-container">
+        <div class="bengali-wish">ফ্রেন্ডস কো-অপারেটিভ ফান্ডের পক্ষ থেকে আপনাকে জানাই জন্মদিনের আন্তরিক শুভেচ্ছা, আগামী পথ আপনার খুব ভালো কাটুক এই আশা রাখে ফান্ডের সকল সদস্যবৃন্দ।</div>
         <div class="birthday-text">Happy Birthday</div>
         <div class="cake-image-wrapper">
             <img src="Cake.png" alt="3D Birthday Cake">
